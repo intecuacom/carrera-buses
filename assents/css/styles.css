@@ -1,47 +1,315 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --track-progress: 78%;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    background:
+        radial-gradient(circle at top, #fff4d6 0, #f8d58a 18%, transparent 40%),
+        linear-gradient(135deg, #123b6d, #1e293b 55%, #7a1628);
+    color: #10233f;
+}
+
+.page {
+    width: min(1120px, 96vw);
+}
+
+.race-card {
+    padding: 28px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a16207;
 }
 
 h1 {
-    color: #333;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.subtitle {
+    margin: 10px 0 24px;
+    color: #475569;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.distance-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.distance-btn,
+.start-btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+}
+
+.distance-btn {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #334155, #0f172a);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.16);
+}
+
+.distance-btn.active {
+    background: linear-gradient(135deg, #b91c1c, #1d4ed8);
+}
+
+.distance-label {
+    margin: 0;
+    font-weight: 700;
+    color: #334155;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.meter-card {
+    padding: 16px 18px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #fff;
+}
+
+.meter-barcelona {
+    background: linear-gradient(135deg, #8b1e3f, #1546a0);
+}
+
+.meter-madrid {
+    background: linear-gradient(135deg, #374151, #0f4c81);
+}
+
+.team-name {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.meter-card strong {
+    font-size: 1.3rem;
 }
 
 .race-track {
     position: relative;
-    width: 80%;
-    margin: 50px auto;
-    height: 150px;
-    border: 2px solid #333;
-    background-color: #fff;
+    height: 320px;
     overflow: hidden;
+    border: 6px solid #dbe4ee;
+    border-radius: 24px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.16)),
+        repeating-linear-gradient(180deg, #4b5563 0 10px, #55606d 10px 20px);
+    box-shadow: inset 0 8px 18px rgba(15, 23, 42, 0.25);
+}
+
+.race-track::before {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    border-top: 5px dashed rgba(255, 255, 255, 0.38);
+    transform: translateY(-50%);
+}
+
+.lane {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+}
+
+.lane-1 {
+    top: 0;
+}
+
+.lane-2 {
+    top: 50%;
+}
+
+.lane-label {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.7);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.distance-marks {
+    position: absolute;
+    top: 14px;
+    left: 120px;
+    right: 10%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.distance-marks span:last-child {
+    text-align: right;
+}
+
+.finish-line {
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        #ffffff 25%,
+        #111827 25%,
+        #111827 50%,
+        #ffffff 50%,
+        #ffffff 75%,
+        #111827 75%,
+        #111827 100%
+    );
+    background-size: 18px 18px;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 .bus {
     position: absolute;
-    top: 20px;
-    width: 100px; /* Ancho de los buses */
+    left: 0%;
+    width: clamp(92px, 11vw, 124px);
+    z-index: 2;
+    transition: left 0.1s linear;
 }
 
 #bus1 {
-    top: 20px;
-    left: 0;
+    top: 70px;
 }
 
 #bus2 {
-    top: 80px;
-    left: 0;
+    top: 224px;
 }
 
 .bus img {
+    display: block;
     width: 100%;
     height: auto;
+    filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.35));
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    margin-top: 20px;
+.controls {
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+    margin-top: 22px;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #0f4c81, #c62828);
+    box-shadow: 0 12px 24px rgba(15, 76, 129, 0.25);
+}
+
+.distance-btn:hover,
+.start-btn:hover {
+    transform: translateY(-1px);
+}
+
+.distance-btn:disabled,
+.start-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+}
+
+.winner-board {
+    width: min(620px, 100%);
+    min-height: 56px;
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 18px;
+    background: #eef2ff;
+    color: #1e293b;
+    font-weight: 700;
+    text-align: center;
+    display: grid;
+    place-items: center;
+}
+
+.winner-barcelona {
+    background: #fee2e2;
+    color: #7f1d1d;
+}
+
+.winner-madrid {
+    background: #dbeafe;
+    color: #1e3a8a;
+}
+
+@media (max-width: 720px) {
+    .race-card {
+        padding: 18px;
+    }
+
+    .toolbar,
+    .scoreboard {
+        grid-template-columns: 1fr;
+    }
+
+    .scoreboard {
+        display: grid;
+    }
+
+    .race-track {
+        height: 280px;
+    }
+
+    .distance-marks {
+        left: 100px;
+        right: 12%;
+        font-size: 0.7rem;
+    }
+
+    #bus1 {
+        top: 72px;
+    }
+
+    #bus2 {
+        top: 205px;
+    }
 }
