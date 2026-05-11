@@ -1,23 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrera de Buses - FC Barcelona vs Real Madrid</title>
-    <link rel="stylesheet" href="assents/css/styles.css">
-</head>
-<body>
-    <h1>Carrera de Buses: FC Barcelona vs Real Madrid</h1>
-    <div class="race-track">
-        <div class="bus" id="bus1">
-            <img src="assents/img/bus-barcelona.png" alt="Bus Barcelona">
-        </div>
-        <div class="bus" id="bus2">
-            <img src="assents/img/bus-realmadrid.png" alt="Bus Real Madrid">
-        </div>
-    </div>
-    <button onclick="startRace()">¡Iniciar Carrera!</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Carrera de Buses - FC Barcelona vs Real Madrid</title>
+        <link rel="stylesheet" href="assents/css/styles.css" />
+    </head>
+    <body>
+        <main class="page">
+            <section class="race-card">
+                <p class="eyebrow">Clasico sobre ruedas</p>
+                <h1>Carrera de Buses</h1>
+                <p class="subtitle">FC Barcelona vs Real Madrid</p>
 
-    <script src="assents/js/script.js"></script>
-</body>
+                <div class="toolbar">
+                    <div class="distance-picker" role="group" aria-label="Seleccionar distancia">
+                        <button type="button" class="distance-btn active" data-distance="100">100 m</button>
+                        <button type="button" class="distance-btn" data-distance="200">200 m</button>
+                        <button type="button" class="distance-btn" data-distance="500">500 m</button>
+                    </div>
+                    <p id="distanceLabel" class="distance-label">Distancia actual: 100 m</p>
+                </div>
+
+                <div class="scoreboard">
+                    <div class="meter-card meter-barcelona">
+                        <span class="team-name">Barcelona</span>
+                        <strong id="meterBus1">0 m</strong>
+                    </div>
+                    <div class="meter-card meter-madrid">
+                        <span class="team-name">Real Madrid</span>
+                        <strong id="meterBus2">0 m</strong>
+                    </div>
+                </div>
+
+                <div class="race-track">
+                    <div class="finish-line"></div>
+
+                    <div class="lane lane-1">
+                        <span class="lane-label">Barcelona</span>
+                    </div>
+
+                    <div class="lane lane-2">
+                        <span class="lane-label">Real Madrid</span>
+                    </div>
+
+                    <div class="distance-marks" aria-hidden="true">
+                        <span>0 m</span>
+                        <span id="markQuarter">25 m</span>
+                        <span id="markHalf">50 m</span>
+                        <span id="markThreeQuarter">75 m</span>
+                        <span id="markFinish">100 m</span>
+                    </div>
+
+                    <div class="bus" id="bus1">
+                        <img src="assents/img/bus-barcelona.png" alt="Bus Barcelona" />
+                    </div>
+
+                    <div class="bus" id="bus2">
+                        <img src="assents/img/bus-realmadrid.png" alt="Bus Real Madrid" />
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="startBtn" class="start-btn" onclick="startRace()">Iniciar carrera</button>
+                    <p id="winner" class="winner-board">Selecciona una distancia y pulsa iniciar</p>
+                </div>
+            </section>
+        </main>
+
+        <script src="assents/js/script.js"></script>
+    </body>
 </html>
